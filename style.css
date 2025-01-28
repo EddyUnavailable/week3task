@@ -34,7 +34,7 @@
   background-color: blue;
   width:20vw;
   height: 20vh;
-  
+  color:red;
   
 }
 
@@ -78,7 +78,7 @@
   overflow: hidden;
 }
  
-.mute {
+.muteB {
   grid-column: 3 / 4;
   grid-row: 4 / 5;
   width:20vw;

@@ -1,67 +1,15 @@
-/*
-fetchData();
 
-async function fetchData() {
-    try{
-        const itemName = document.getElementById("itemName")
-        const response = await fetch(`https://cookie-upgrade-api.vercel.app/api/upgrades`);
-        if(!response.ok){
-            throw new Error("could not fetch")
-        }
-        const data = await response.json();
-        console.log(data);
-    }
-    catch(error){
-        console.error(error);
-    }
-    
-}
+fetch(`https://cookie-upgrade-api.vercel.app/api/upgrades`, Option)
+.then(Response => Response.json())
+.then(response =>{console.log(response)
+    const textDiv = document.getElementById(`shop1`);
+    const p = document.createElement(`p`);
+    const pText = document.createTextNode(response[0].name);
+    textDiv.appendChild(p);
+    p.appendChild(pText);
+})
 
-
-
-function generateUI(dataToRender) {
-  
-    for (let i = 0; i < dataToRender.length; i++) {
-        // 1. create the element(s) (the ptag) we want
-        const containerElem = document.createElement('div')
-        const titleElem = document.createElement('h2')
-        const pElem = document.createElement('p')
-
-        // 2. Put the info we need in them.
-        titleElem.innerText = dataToRender[i].title
-        pElem.innerText = dataToRender[i].body
-
-        containerElem.setAttribute('class', 'post')
-
-        // 3. append the title and ptag to the container we made
-        containerElem.appendChild(titleElem)
-        containerElem.appendChild(pElem)
-
-        const contentDiv = document.getElementById('content')
-        contentDiv.appendChild(containerElem)
-    }
-
-    dataToRender.forEach((post) => {
-           // 1. create the element(s) (the ptag) we want
-           const containerElem = document.createElement('div')
-           const titleElem = document.createElement('h2')
-           const pElem = document.createElement('p')
-   
-           // 2. Put the info we need in them.
-           titleElem.innerText = post.title
-           pElem.innerText = post.body
-   
-           containerElem.setAttribute('class', 'coolerPost')
-   
-           // 3. append the title and ptag to the container we made
-           containerElem.appendChild(titleElem)
-           containerElem.appendChild(pElem)
-   
-           const contentDiv = document.getElementById('content')
-           contentDiv.appendChild(containerElem)
-    })
-}*/
-
+const audio2 =new Audio("giggle.mp3");
 const audio =new Audio("music1.mp3");
 const pressElem = document.querySelector(".press");
 const press2Elem = document.querySelector(".topRight");
@@ -69,7 +17,6 @@ let counterDisplayElem = document.querySelector('.counterDisplay');
 let bonusDisplayElem = document.querySelector('.bonus');
 let bonus = localStorage.getItem(`bonus`) || 1;
 let count = localStorage.getItem(`count`) || 0;
-/*let incValue = document.getElementById("bonus")*/
 const reset = document.querySelector(`.clear`)
 
 
@@ -77,11 +24,13 @@ reset.addEventListener("click",()=>{
     localStorage.clear()
     clearInterval(count)
     count=0
+    bonus=1
+    updateUI();
 })
 
 
 setInterval(()=>{
-    count += bonus; 
+    count = ++(bonus); 
     console.log()
     updateDisplay();
     
@@ -90,26 +39,31 @@ setInterval(()=>{
 pressElem.addEventListener("click",()=>{ 
     count++;
     updateDisplay();
-    audio.play();
+    audio2.play();
     
 }) ; 
+
 function updateDisplay(){
     counterDisplayElem.innerHTML = count;
     localStorage.setItem('count', count)
 };
 
-pressElem.addEventListener("click",()=>{ 
+press2Elem.addEventListener("click",()=>{ 
     count++;
     updateBonus();
+    audio.play();
     
-}) ; 
+}) ;
+
 function updateBonus(){
-    bonusDisplayElem.innerHTML = count;
+    bonusDisplayElem.innerHTML = bonus;
+    localStorage.setItem('bonus', bonus)
    
 };
 
 function toggleMute() {
     audio.muted = !audio.muted;
+    audio2.muted = !audio2.muted;
  }
 
 /*function random_bg_color() {
